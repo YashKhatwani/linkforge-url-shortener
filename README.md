@@ -17,24 +17,29 @@ LinkForge is a full-stack URL shortener built with Spring Boot, PostgreSQL, Redi
 - React + Vite dashboard with create, copy, expiry, and analytics UI.
 - Docker Compose for local PostgreSQL, Redis, and Kafka.
 
+
 ## Architecture
 
 ```mermaid
 flowchart LR
-    B[Browser] --> FE[React + Vite]
-    FE -->|REST API| API[Spring Boot]
-    B -->|GET /{shortCode}| API
-    API --> S[URL Shortener Service]
-    S -->|Cache lookup / fill| R[(Redis)]
-    S -->|Cache miss / persistence| DB[(PostgreSQL URL mappings)]
-    S -->|Click event| K[(Kafka: url-click-events)]
-    K --> C[Kafka Consumer]
-    C --> P[(processed_click_events)]
-    C --> A[(url_click_analytics)]
-    FE -->|List / analytics| API
+    B["Browser"] --> FE["React + Vite"]
+    FE -->|REST API| API["Spring Boot"]
+    B -->|Short URL redirect| API
+
+    API --> S["URL Shortener Service"]
+    S -->|Cache lookup / fill| R[("Redis")]
+    S -->|Cache miss / persistence| DB[("PostgreSQL URL mappings")]
+
+    S -->|Publish click event| K[("Kafka: url-click-events")]
+    K --> C["Kafka Consumer"]
+    C --> P[("processed_click_events")]
+    C --> A[("url_click_analytics")]
+
+    FE -->|List / analytics API| API
 ```
 
 See [`docs/architecture.md`](docs/architecture.md) for request flows and trade-offs.
+
 
 ## Technology stack
 
