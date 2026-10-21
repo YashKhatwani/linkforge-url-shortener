@@ -1,4 +1,6 @@
 # LinkForge — URL Shortener with Redis & Kafka
+<img width="1806" height="988" alt="image" src="https://github.com/user-attachments/assets/a7d0629c-eb32-4bd0-8d25-de214d6b1c60" />
+
 
 LinkForge is a full-stack URL shortener built with Spring Boot, PostgreSQL, Redis, Kafka, and React. It demonstrates persistent URL mappings, cache-aside reads, asynchronous click analytics, idempotent event processing, and a paginated dashboard.
 
